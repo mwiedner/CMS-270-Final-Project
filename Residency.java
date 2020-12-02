@@ -8,8 +8,8 @@ public class Residency {
 
   // Data members
   private String dormName;
-  private ArrayList<Room> rooms;
-  private ArrayList<Student> residents;
+  private ArrayList<Room> rooms = new ArrayList<Room>();
+  private ArrayList<Student> residents = new ArrayList<Student>();
 
   // Constructor
   public Residency(String d, ArrayList<Room> r, ArrayList<Student> res) {

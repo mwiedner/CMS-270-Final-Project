@@ -8,8 +8,8 @@ public class Course {
   
   // Data Members
   private String courseName;
-  private ArrayList<Student> totalStudents;
-  private ArrayList<Student> f2fStudents;
+  private ArrayList<Student> totalStudents = new ArrayList<Student>();
+  private ArrayList<Student> f2fStudents = new ArrayList<Student>();
   private boolean inPerson;
 
   // Constructor
@@ -70,8 +70,8 @@ public class Course {
     }
 
     public void contactF2F() { // Loop through all face-to-face students and move them to quarantine
-      for 
+      for(int i = 0; i < f2fStudents.size(); i++) {
+        f2fStudents.get(i).startQuarantine();
+      }
     }
-
-
 }

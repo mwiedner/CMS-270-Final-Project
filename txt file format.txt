@@ -1,0 +1,42 @@
+all txt files are formatted with fields seperated by spaces
+
+StudentData:
+number of student entries (int) (new line)
+Student first name
+Student last name
+Rnumber
+Number of courses enrolled (int)
+Course names (however many specified)
+1 if living on campus, 0 if living off campus (int)
+if living on campus:
+    Dorm hall name 
+    Room number (int)
+    Number of roommates (int)
+    Names of roommates (however many specified)
+Repeat back to line 5 for each student
+
+DayData: 
+P = tested positive outside of normal contact tracing, S = became sick and not picked up by contact tracing, W = withdrew from school entirely, H = moved off campus, C = Changed rooms, D = dropped class
+Number of days simulated (int) (new line)
+P or S or W or H or D
+P:
+  Student first name
+  Student last name
+S:
+  Student first name
+  Student last name
+W:
+  Student first name
+  Student last name
+H:
+  Student first name
+  Student last name
+C:
+  Student first name
+  Student last
+  New dorm name
+  New dorm number
+D:
+  Student first name
+  Student last name
+  Class code
