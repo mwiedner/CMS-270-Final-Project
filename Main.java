@@ -6,6 +6,7 @@ public class Main {
     private static ArrayList<Student> students = new ArrayList<Student>();
     private static ArrayList<Course> courses = new ArrayList<Course>();
     private static ArrayList<Residency> residencies = new ArrayList<Residency>();
+    private static ArrayList<Room> allRooms = new ArrayList<Room>();
 
     private static ArrayList<Student> isolatedStudents = new ArrayList<Student>();
     private static ArrayList<Student> quarantinedStudents = new ArrayList<Student>();
@@ -33,6 +34,11 @@ public class Main {
         residencies.add(new Residency(d, r, res));
     }
 
+    public static void makeRoom(int rn, ArrayList<Student> s, Residency res) {
+        allRooms.add(new Room(rn, s, res));
+        res.addRoom(allRooms.get(allRooms.size() - 1)); // Use the addRoom method in Residency to add the new room to the given residency. The parameter of the addRoom method is the last method added to the allRooms ArrayList, which is the room at the index allRooms.size() - 1.
+    }
+
     // Methods
     public void dayCounter(Student s){ // Method that shows how many days Student s has left in quarantine or isolation
         if ((s.getQuarantineStatus() == 0) && (s.getIsolationStatus() == 0)) { // If both Isolation Status and Quarantine Status are zero, then they are not in quarantine or isolation
@@ -47,19 +53,29 @@ public class Main {
     }
 
     public static void dayPassed() { // Method for keeping track of passing days and updating quarantine and isolation times
-        daysPassed++;
+        daysPassed++; // Increase daysPassed by one
 
         for (int i = 0; i < students.size(); i++) { // Loop through all Students
             if (students.get(i).getQuarantineStatus() != 0) { // If a student's quarantine status is nonzero,
                 students.get(i).setQuarantineStatus(students.get(i).getQuarantineStatus() - 1); // then reduce their quarantine status by one
+
+                if (students.get(i).getQuarantineStatus() == 0) { // If the student's quarantine status is now zero,
+                    removeQuarantined(students.get(i)); // Then remove them from the total quarantined students ArrayList
+                }
             }
+
             else if (students.get(i).getIsolationStatus() != 0) { // If a student's isolation status is nonzero,
                 students.get(i).setIsolationStatus(students.get(i).getIsolationStatus() - 1); // then reduce their isolation status by one
+
+                if (students.get(i).getIsolationStatus() == 0) { // If the student's isolation status is now zero,
+                    removeIsolated(students.get(i)); // Then remove them from the total isolated students ArrayList
+                }
             }
         }
     }
 
-    public static Student studentFromR(String rNumber) { // Method for getting a Student object based on their rNumber
+    // Method for getting a Student object based on their rNumber
+    public static Student studentFromR(String rNumber) {
         for (int i = 0; i < students.size(); i++) { // Loop through all Students and check if there is a match with the rNumber.
             if (rNumber.equals(students.get(i).getrNumber())) { // If there's a match, return that Student
                     return students.get(i);
@@ -71,8 +87,8 @@ public class Main {
         return null; // If none is found, return null
     }
 
-
-    public static void displayDatabase() { // Method that prints all of the data members above as well as a few percentages computed from the given information
+    // Method that prints all of the data members above as well as a few percentages computed from the given information
+    public static void displayDatabase() {
         System.out.println("Total students: " + numStudents +
                 "\nTotal courses: " + numCourses +
                 "\nTotal residencies " + numResidencies +
@@ -82,6 +98,20 @@ public class Main {
                 "\nTotal negative tests: " + numNegativeTests +
                 "\nPercentage of students tested positive: " + (numPositiveCases/numStudents*100) + "%" +
                 "\nPercentage of tests resulting negative: " + (numNegativeTests/numTestsAdministered*100) + "%");
+    }
+
+    // Methods for adding and removing students from the respective total isolated and total quarantined ArrayLists
+    public static void addIsolated(Student s) {
+        isolatedStudents.add(s);
+    }
+    public static void removeIsolated(Student s) {
+        isolatedStudents.remove(s);
+    }
+    public static void addQuarantined(Student s) {
+        quarantinedStudents.add(s);
+    }
+    public static void removeQuarantined(Student s) {
+        quarantinedStudents.remove(s);
     }
 
 

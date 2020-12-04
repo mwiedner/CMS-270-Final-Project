@@ -41,4 +41,9 @@ public class Residency {
         this.residents = residents;
     }
 
+    // Method to add a room to the ArrayList rooms
+    public void addRoom(Room r) {
+        rooms.add(r);
+    }
+
 }
