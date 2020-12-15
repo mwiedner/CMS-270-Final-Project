@@ -8,9 +8,8 @@ public class Room {
     private Residency residency;
 
     // Constructor
-    public Room(int rn, ArrayList<Student> s, Residency r) {
+    public Room(int rn, Residency r) {
         roomNumber = rn;
-        roommates = s;
         residency = r;
     }
 

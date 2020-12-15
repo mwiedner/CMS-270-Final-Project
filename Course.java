@@ -4,15 +4,12 @@ public class Course {
 
     // Data Members
     private String courseName;
-    private ArrayList<Student> totalStudents = new ArrayList<Student>();
-    private ArrayList<Student> f2fStudents = new ArrayList<Student>();
+    private ArrayList<Student> students = new ArrayList<Student>();
     private boolean inPerson;
 
     // Constructor
-    public Course(String c, ArrayList<Student> t, ArrayList<Student> f, boolean i) {
+    public Course(String c, boolean i) {
         courseName = c;
-        totalStudents = t;
-        f2fStudents = f;
         inPerson = i;
     }
 
@@ -26,23 +23,13 @@ public class Course {
     }
 
 
-    public ArrayList<Student> getTotalStudents() {
-        return totalStudents;
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 
-    public void setTotalStudents(ArrayList<Student> totalStudents) {
-        this.totalStudents = totalStudents;
+    public void setStudents(ArrayList<Student> totalStudents) {
+        this.students = totalStudents;
     }
-
-
-    public ArrayList<Student> getF2fStudents() {
-        return f2fStudents;
-    }
-
-    public void setF2fStudents(ArrayList<Student> f2fStudents) {
-        this.f2fStudents = f2fStudents;
-    }
-
 
     public boolean isInPerson() {
         return inPerson;
@@ -53,21 +40,18 @@ public class Course {
     }
 
     // Methods
-    public void addF2F(Student s) { // Add a student to the face-to-face ArrayList
-        f2fStudents.add(s);
+
+    public void removeStudent(Student s) { // Remove a student from the totalStudents ArrayList
+        students.remove(s);
+    }
+    
+    public void addStudent(Student s) { // Remove a student from the totalStudents ArrayList
+        students.add(s);
     }
 
-    public void removeF2F(Student s) { // Remove a student from the face-to-face ArrayList
-        f2fStudents.remove(s);
-    }
-
-    public void removeTotalStudent(Student s) { // Remove a student from the totalStudents ArrayList
-        totalStudents.remove(s);
-    }
-
-    public void contactF2F() { // Loop through all face-to-face students and move them to quarantine
-        for(int i = 0; i < f2fStudents.size(); i++) {
-            f2fStudents.get(i).startQuarantine();
+    public void contactStudent() { // Loop through all students and move them to quarantine
+        for(int i = 0; i < students.size(); i++) {
+            students.get(i).startQuarantine();
         }
     }
 }

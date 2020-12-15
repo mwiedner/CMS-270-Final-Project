@@ -5,13 +5,10 @@ public class Residency {
     // Data members
     private String dormName;
     private ArrayList<Room> rooms = new ArrayList<Room>();
-    private ArrayList<Student> residents = new ArrayList<Student>();
 
     // Constructor
-    public Residency(String d, ArrayList<Room> r, ArrayList<Student> res) {
+    public Residency(String d) {
         dormName = d;
-        rooms = r;
-        residents = res;
     }
 
     // Getters and setters
@@ -30,15 +27,6 @@ public class Residency {
 
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
-    }
-
-
-    public ArrayList<Student> getResidents() {
-        return residents;
-    }
-
-    public void setResidents(ArrayList<Student> residents) {
-        this.residents = residents;
     }
 
     // Method to add a room to the ArrayList rooms

@@ -13,14 +13,12 @@ public class Student {
     private ArrayList<Course> registeredCourses = new ArrayList<Course>();
 
     // Constructor
-    public Student(String n, String r, int i, boolean t, int q, Room ro, ArrayList<Course> reg) {
+    public Student(String n, String r, boolean t) {
         studentName = n;
         rNumber = r;
-        isolationStatus = i;
+        isolationStatus = 0;
         testResult = t;
-        quarantineStatus = q;
-        room = ro;
-        registeredCourses = reg;
+        quarantineStatus = 0;
     }
 
     Scanner InputScan = new Scanner(System.in);
@@ -89,6 +87,13 @@ public class Student {
     }
 
     // Methods
+    public void addCourse(Course c) {
+    	this.registeredCourses.add(c);
+    }
+
+    public void removeCourse(Course c) {
+      registeredCourses.remove(c);
+    }
 
     // Method to notify a student, prompting them to be tested and begin their isolation.
     public void notify(Student s) {
@@ -106,23 +111,23 @@ public class Student {
         }
 
         for (int i = 0; i < registeredCourses.size(); i++) { // Loop through all registered courses and save the f2f classmates
-            ArrayList<Student> f2fclassmates = new ArrayList<Student>();
-            f2fclassmates = registeredCourses.get(i).getF2fStudents();
+            ArrayList<Student> classmates = new ArrayList<Student>();
+            classmates = registeredCourses.get(i).getStudents();
 
-            for (int j = 0; j < f2fclassmates.size(); j++) { // Loop through the f2f classmates and notify them
-                notify(f2fclassmates.get(j));
+            for (int j = 0; j < classmates.size(); j++) { // Loop through the f2f classmates and notify them
+                notify(classmates.get(j));
             }
         }
 
         for (int i = 0; i < outsideContacts.size(); i++) { // Loop through outsideContacts and notify each
             notify(outsideContacts.get(i));
         }
-
     }
 
     // Method for handling a COVID test
     public void test(boolean result) {
         setTestResult(result);
+        Main.numTestsAdministered++;
 
         if (result == true) { // If result is true, then they tested positive
             System.out.println(getStudentName() + " has tested positive.");
@@ -131,6 +136,7 @@ public class Student {
         }
         else if (result == false) {
             System.out.println(getStudentName() + " has tested negative.");
+            Main.numNegativeTests++;
         }
     }
 
@@ -165,5 +171,17 @@ public class Student {
             }
         }
         return outsideContacts;
+    }
+
+    public void printIsoQuarData() { // Print information regarding the duration of their quarantine or isolation to the console
+      if (getQuarantineStatus() != 0) {
+        System.out.println("The student " + getStudentName() + " is currently in quarantine for " + getQuarantineStatus() + " more days.");
+      }
+      else if (getIsolationStatus() != 0) {
+        System.out.println("The student " + getStudentName() + " is currently in isolation for " + getIsolationStatus() + " more days.");
+      }
+      else {
+        System.out.println("The student " + getStudentName() + " is currently not in isolation or quarantine.");
+      }
     }
 }
