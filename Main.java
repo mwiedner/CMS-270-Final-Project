@@ -137,7 +137,7 @@ public class Main {
 
     // Method for welcoming a user and processing their requests
     public static void welcome() {
-      System.out.println("Would you like to\n[1.] View COVID statistics\n[2.] Input COVID test results\n[3.]Check the status of a student\n[4.]Exit the application\n\nPlease type the number corresponding to your request below.");
+      System.out.println("Would you like to\n[1.] View COVID statistics\n[2.] Input COVID test results\n[3.] Check the status of a student\n[4.] Exit the application\n\nPlease type the number corresponding to your request below.");
       Scanner scanner = new Scanner(System.in);
       boolean running = true;
       while (running) {
@@ -202,7 +202,7 @@ public class Main {
     public static void processData() {
       try {
         File file = new File("StudentData.txt");
-        File d = new File("DayDaya.txt");
+        File d = new File("DayData.txt");
         Scanner scan = new Scanner(file);
         Scanner a = new Scanner(d);
         
